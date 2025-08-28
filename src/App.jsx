@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [duration, setDuration] = useState(1)
+  const [duration, setDuration] = useState(5)
   const [progress, setProgress] = useState(0)
   const [working, setWorking] = useState(false)
   const inputRef = useRef(null)
@@ -30,6 +30,14 @@ function App() {
     return () => clearInterval(inputRef.current)
   }, [])
 
+   const handleInputChange = (value) => {
+    if (value === '' || Number(value) <= 0) {
+      setDuration(1)
+    } else {
+      setDuration(Number(value))
+    }
+  }
+
   return (
     <>
       <div className='main-div'>
@@ -41,7 +49,9 @@ function App() {
             className='input-box'
             value={duration}
             disabled={working}
-            onChange={(e) => setDuration(e?.target?.value)}
+            min={1}
+            onChange={(e) => handleInputChange(e?.target?.value)}
+
           />
           <button 
             className='start-btn'
@@ -53,7 +63,7 @@ function App() {
 
         <div className='progressbar-div'>
           <div className='progressbar-fill' style={{ width: `${progress}%` }}></div>
-          <p className='progressbar-count'>{Math.round(progress)}%</p>
+          <p className='progressbar-count'>{Math?.round(progress)}%</p>
         </div>
 
       </div>

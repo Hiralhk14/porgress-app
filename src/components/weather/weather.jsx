@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { Sun, Cloud, CloudRain, Snowflake, Wind } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 import mockWeatherData from "../data/weatherData";
 
 const Weather = () => {
   const [celsius, setCelsius] = useState(true);
   const [index, setIndex] = useState(0);
-
-  // const mockWeatherData = {
-  //   city: "New York",
-  //   temperature: 22, // in Celsius
-  //   condition: "Sunny",
-  // };
+  const navigate = useNavigate();
 
   const currentWeather = mockWeatherData[index];
 
-  const tempCalculations = (temp, isCelsius) => {
-    return isCelsius ? temp : (temp * 9) / 5 + 32;
-  };
+  const tempCalculations = (temp, isCelsius) =>
+    isCelsius ? temp : (temp * 9) / 5 + 32;
 
   const temperatureValue = tempCalculations(
     currentWeather?.temperature,
@@ -54,14 +50,14 @@ const Weather = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-100 min-h-screen p-4">
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen p-4 gap-6">
       <div
         className={`
-          ${gradientBackground(currentWeather?.condition)}
-          rounded-3xl shadow-2xl p-8 w-full max-w-sm
-          transform transition-all duration-300 hover:scale-105
-          backdrop-blur-sm border border-white/20
-        `}
+        ${gradientBackground(currentWeather?.condition)}
+        rounded-3xl shadow-2xl p-8 w-full max-w-sm
+        transform transition-all duration-300 hover:scale-105
+        backdrop-blur-sm border border-white/20
+      `}
       >
         <div className="text-center mb-6">
           <h1 className="text-3xl font-extrabold text-white drop-shadow-md">
@@ -86,27 +82,36 @@ const Weather = () => {
           <button
             onClick={() => setCelsius(!celsius)}
             className="
-              flex-1 bg-white/20 backdrop-blur-sm border border-white/30
-              text-white font-semibold py-3 px-6 rounded-2xl
-              transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg
-              active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40
-            "
+            flex-1 bg-white/20 backdrop-blur-sm border border-white/30
+            text-white font-semibold py-3 px-6 rounded-2xl
+            transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg
+            active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40
+          "
           >
             {celsius ? "To °F" : "To °C"}
           </button>
           <button
-            onClick={() => setIndex((prev) => (prev + 1) % mockWeatherData?.length)}
+            onClick={() =>
+              setIndex((prev) => (prev + 1) % mockWeatherData?.length)
+            }
             className="
-              flex-1 bg-white/20 backdrop-blur-sm border border-white/30
-              text-white font-semibold py-3 px-6 rounded-2xl
-              transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg
-              active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40
-            "
+            flex-1 bg-white/20 backdrop-blur-sm border border-white/30
+            text-white font-semibold py-3 px-6 rounded-2xl
+            transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg
+            active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40
+          "
           >
             Change Weather
           </button>
         </div>
       </div>
+
+      <button
+        className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-2xl shadow-md hover:bg-blue-600 hover:scale-105 transition-transform duration-200"
+        onClick={() => navigate("/weather-app")}
+      >
+        Go to Another Weather Page
+      </button>
     </div>
   );
 };

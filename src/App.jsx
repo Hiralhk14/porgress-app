@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
   const [duration, setDuration] = useState(5)
   const [progress, setProgress] = useState(0)
   const [working, setWorking] = useState(false)
   const inputRef = useRef(null)
+  const navigate = useNavigate()
 
   const onStart = () => {
     if (!duration || duration <= 0) return
@@ -65,6 +67,11 @@ function App() {
           <div className='progressbar-fill' style={{ width: `${progress}%` }}></div>
           <p className='progressbar-count'>{Math?.round(progress)}%</p>
         </div>
+
+        <button className='mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+        onClick={() => navigate('/weather')}>
+          go to weather page
+        </button>
 
       </div>
     </>

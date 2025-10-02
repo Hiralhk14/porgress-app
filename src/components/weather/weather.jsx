@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Sun, Cloud, CloudRain, Snowflake, Wind } from "lucide-react";
-import mockWeatherData from "./data/weatherData";
+import mockWeatherData from "../data/weatherData";
 
 const Weather = () => {
   const [celsius, setCelsius] = useState(true);

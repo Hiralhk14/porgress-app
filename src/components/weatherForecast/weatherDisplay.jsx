@@ -21,9 +21,9 @@ export const WeatherDisplay = ({ weather, loading }) => {
 
       <div className="text-center mb-8">
         <div className="mb-4">
-          <WeatherIcon condition={weather?.condition} size="large" />
+          <WeatherIcon condition={weather?.condition} size="medium" />
         </div>
-        <h3 className="text-6xl font-bold text-white mb-2">
+        <h3 className="text-3xl font-bold text-white mb-2">
           {weather?.temperature}°C
         </h3>
         <p className="text-xl text-blue-100 font-medium">{weather?.condition}</p>
